@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant POS & Management System | Sonny Sayi Solutions</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-deep: #0a0f0c;
+            --color-surface: #111a14;
+            --color-ink: #e8ede9;
+            --color-cream: #f5f3ef;
+            --color-accent: #c9a96e;
+            --color-sage: #7a8b6f;
+            --font-main: 'Montserrat', sans-serif;
+            --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: var(--font-main);
+            font-weight: 400;
+            background-color: var(--color-deep);
+            color: var(--color-ink);
+            line-height: 1.7;
+            font-size: 1rem;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .scroll-progress {
+            position: fixed; top: 0; left: 0; height: 2px;
+            background: linear-gradient(90deg, var(--color-sage), var(--color-accent));
+            z-index: 10000; transition: width 0.1s ease;
+        }
+
+        .nav-fixed {
+            position: fixed; top: 0; left: 0; right: 0;
+            padding: 1.5rem 3rem; display: flex; justify-content: space-between; align-items: center;
+            z-index: 1000; background: linear-gradient(to bottom, var(--color-deep), transparent);
+            backdrop-filter: blur(8px);
+        }
+
+        .nav-logo {
+            font-family: var(--font-main); font-size: 1rem; font-weight: 600;
+            color: var(--color-ink); text-decoration: none; letter-spacing: 0.1em; text-transform: uppercase;
+        }
+
+        .nav-actions { display: flex; gap: 1rem; }
+
+        .btn-nav {
+            padding: 0.6rem 1.5rem; background: transparent;
+            border: 1px solid rgba(232, 237, 233, 0.3); color: var(--color-ink);
+            font-family: var(--font-main); font-size: 0.8rem; font-weight: 500;
+            letter-spacing: 0.05em; text-transform: uppercase; border-radius: 4px;
+            cursor: pointer; transition: all 0.4s var(--transition-smooth); text-decoration: none;
+        }
+
+        .btn-nav:hover { background: var(--color-ink); color: var(--color-deep); border-color: var(--color-ink); }
+
+        section { position: relative; padding: 8rem 3rem; display: flex; align-items: center; }
+        .container { max-width: 1100px; margin: 0 auto; width: 100%; }
+
+        h1, h2, h3, h4 { font-family: var(--font-main); font-weight: 600; line-height: 1.2; letter-spacing: -0.02em; }
+        h1 { font-size: clamp(2.5rem, 6vw, 4rem); margin-bottom: 1.5rem; }
+        h2 { font-size: clamp(2rem, 4vw, 2.75rem); margin-bottom: 2rem; }
+        h3 { font-size: 1.25rem; margin-bottom: 1rem; color: var(--color-cream); font-weight: 600; }
+        h4 { font-size: 1rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.75rem; color: var(--color-accent); }
+
+        p { margin-bottom: 1.5rem; color: rgba(232, 237, 233, 0.75); font-weight: 300; }
+
+        .label {
+            font-family: var(--font-main); font-size: 0.75rem; font-weight: 600;
+            text-transform: uppercase; letter-spacing: 0.15em; color: var(--color-sage);
+            margin-bottom: 1.5rem; display: block;
+        }
+
+        .hero { min-height: 100vh; background: var(--color-deep); position: relative; }
+        .hero-content { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+
+        .hero-meta {
+            display: flex; gap: 3rem; margin-top: 3rem; padding-top: 2rem;
+            border-top: 1px solid rgba(232, 237, 233, 0.1);
+        }
+        .meta-item { font-size: 0.85rem; color: rgba(232, 237, 233, 0.5); letter-spacing: 0.02em; }
+        .meta-item strong { color: var(--color-ink); display: block; font-weight: 600; margin-bottom: 0.25rem; }
+
+        .hero-visual {
+            position: relative; border-radius: 8px; overflow: hidden;
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.4);
+        }
+        .zoomable-img {
+            width: 100%; height: auto; display: block; cursor: zoom-in;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        .zoomable-img:hover { opacity: 0.9; }
+        .hero-visual:hover .zoomable-img { transform: scale(1.02); }
+
+        .opportunity { background: var(--color-surface); }
+        .split-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
+
+        .insight-card {
+            background: rgba(232, 237, 233, 0.03); border: 1px solid rgba(232, 237, 233, 0.08);
+            border-radius: 8px; padding: 2.5rem; margin-bottom: 1.5rem;
+            transition: all 0.4s var(--transition-smooth); border-left: 3px solid var(--color-sage);
+        }
+        .insight-card:hover { background: rgba(232, 237, 233, 0.05); border-left-color: var(--color-accent); }
+
+        .vision { background: var(--color-deep); }
+        .vision-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 4rem; }
+        .vision-card { padding: 2.5rem 2rem; border-top: 1px solid var(--color-sage); }
+        .vision-number {
+            font-family: var(--font-main); font-size: 3rem; font-weight: 700;
+            color: var(--color-accent); opacity: 0.4; line-height: 1; margin-bottom: 1.5rem;
+        }
+
+        .configurations { background: var(--color-surface); }
+        .config-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-top: 3rem; }
+        .config-card {
+            background: rgba(232, 237, 233, 0.02); border: 1px solid rgba(232, 237, 233, 0.1);
+            border-radius: 8px; padding: 3rem; transition: all 0.4s var(--transition-smooth);
+            display: flex; flex-direction: column;
+        }
+        .config-card:hover { border-color: var(--color-sage); transform: translateY(-4px); }
+
+        .config-price { font-family: var(--font-main); font-size: 2.5rem; font-weight: 700; color: var(--color-ink); margin: 1.5rem 0; }
+        .config-list { list-style: none; margin: 1.5rem 0; flex-grow: 1; }
+        .config-list li {
+            padding: 0.6rem 0; padding-left: 1.5rem; position: relative;
+            font-size: 0.95rem; color: rgba(232, 237, 233, 0.8); border-bottom: 1px solid rgba(232, 237, 233, 0.05); font-weight: 300;
+        }
+        .config-list li:last-child { border-bottom: none; }
+        .config-list li::before {
+            content: ''; position: absolute; left: 0; top: 1rem;
+            width: 6px; height: 6px; background: var(--color-sage); border-radius: 50%;
+        }
+
+        .features { background: var(--color-deep); }
+        .features-list { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-top: 3rem; }
+        .feature-item { padding-bottom: 2rem; border-bottom: 1px solid rgba(232, 237, 233, 0.1); }
+
+        .timeline-section { background: var(--color-surface); }
+        .timeline { display: flex; justify-content: space-between; margin-top: 4rem; position: relative; }
+        .timeline::before {
+            content: ''; position: absolute; top: 15px; left: 0; right: 0;
+            height: 1px; background: rgba(232, 237, 233, 0.15);
+        }
+        .timeline-item { text-align: left; position: relative; z-index: 1; flex: 1; padding-right: 2rem; }
+        .timeline-day {
+            width: 30px; height: 30px; background: var(--color-deep);
+            border: 1px solid var(--color-sage); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            margin-bottom: 1.5rem; font-family: var(--font-main); font-size: 0.75rem; font-weight: 700; color: var(--color-accent);
+        }
+        .timeline-label { font-size: 0.9rem; font-weight: 600; color: var(--color-ink); margin-bottom: 0.5rem; }
+        .timeline-desc { font-size: 0.85rem; color: rgba(232, 237, 233, 0.5); line-height: 1.5; font-weight: 300; }
+
+        .investment { background: var(--color-deep); }
+        .pricing-card { border: 1px solid rgba(232, 237, 233, 0.15); border-radius: 8px; padding: 4rem; max-width: 800px; margin: 0 auto; }
+        .payment-table { width: 100%; max-width: 600px; margin: 2rem auto; border-collapse: collapse; }
+        .payment-table td { padding: 1rem 0; border-bottom: 1px solid rgba(232, 237, 233, 0.1); text-align: left; font-size: 0.95rem; font-weight: 300; }
+        .payment-table td:last-child { text-align: right; font-weight: 600; }
+        .payment-table tr:last-child td { border-bottom: none; font-size: 1.1rem; color: var(--color-accent); }
+
+        .cta { background: var(--color-cream); color: var(--color-deep); text-align: center; }
+        .cta h2 { color: var(--color-deep); }
+        .cta p { color: rgba(10, 15, 12, 0.7); max-width: 600px; margin: 0 auto 2.5rem; }
+
+        .btn-large {
+            padding: 1rem 2.5rem; font-size: 0.85rem; font-weight: 600;
+            letter-spacing: 0.1em; text-transform: uppercase; border-radius: 4px;
+            text-decoration: none; display: inline-flex; align-items: center; gap: 0.75rem;
+            transition: all 0.4s var(--transition-smooth); border: 1px solid var(--color-deep);
+        }
+        .btn-dark { background: var(--color-deep); color: var(--color-cream); }
+        .btn-dark:hover { background: var(--color-surface); transform: translateY(-2px); }
+        .btn-outline { background: transparent; color: var(--color-deep); margin-left: 1rem; }
+        .btn-outline:hover { background: var(--color-deep); color: var(--color-cream); }
+
+        footer { background: var(--color-deep); padding: 4rem 3rem; border-top: 1px solid rgba(232, 237, 233, 0.1); }
+        .footer-content { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
+        .footer-brand { font-family: var(--font-main); font-size: 1.2rem; font-weight: 600; letter-spacing: 0.05em; }
+        .footer-tagline { font-size: 0.85rem; color: var(--color-sage); margin-top: 0.5rem; font-weight: 300; }
+        .footer-contact { text-align: right; font-size: 0.85rem; color: rgba(232, 237, 233, 0.5); line-height: 1.8; }
+        .footer-contact a { color: var(--color-ink); text-decoration: none; display: block; transition: color 0.3s ease; }
+        .footer-contact a:hover { color: var(--color-accent); }
+
+        .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.8s var(--transition-smooth), transform 0.8s var(--transition-smooth); }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+        .modal {
+            display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(10, 15, 12, 0.95); z-index: 10000;
+            align-items: center; justify-content: center; padding: 2rem;
+        }
+        .modal.active { display: flex; }
+        .modal-content { background: var(--color-surface); border: 1px solid rgba(232, 237, 233, 0.15); border-radius: 8px; padding: 3rem; max-width: 450px; text-align: center; }
+        .modal h3 { margin-bottom: 1rem; font-size: 1.5rem; }
+        .modal p { margin-bottom: 2rem; font-size: 0.95rem; }
+        .modal-buttons { display: flex; gap: 1rem; justify-content: center; }
+        .btn-modal {
+            padding: 0.8rem 1.5rem; border-radius: 4px; border: 1px solid rgba(232, 237, 233, 0.3);
+            background: transparent; color: var(--color-ink); font-family: var(--font-main);
+            font-size: 0.8rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase;
+            cursor: pointer; transition: all 0.3s ease;
+        }
+        .btn-modal.primary { background: var(--color-sage); border-color: var(--color-sage); color: var(--color-deep); }
+        .btn-modal:hover { transform: translateY(-2px); }
+
+        .lightbox {
+            display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(10, 15, 12, 0.95); backdrop-filter: blur(10px); z-index: 10001;
+            justify-content: center; align-items: center; opacity: 0; transition: opacity 0.4s ease; cursor: zoom-out;
+        }
+        .lightbox.active { display: flex; opacity: 1; }
+        .lightbox-img-container { position: relative; max-width: 90vw; max-height: 90vh; display: flex; justify-content: center; align-items: center; }
+        .lightbox-img {
+            max-width: 100%; max-height: 85vh; object-fit: contain; border-radius: 8px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5); transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-origin: center center; cursor: zoom-in; border: 1px solid rgba(201, 169, 110, 0.3);
+        }
+        .lightbox-img.zoomed { transform: scale(1.8); cursor: zoom-out; max-width: none; max-height: none; }
+        .lightbox-close {
+            position: absolute; top: 2rem; right: 2rem; width: 48px; height: 48px;
+            background: rgba(232, 237, 233, 0.1); border: 1px solid rgba(232, 237, 233, 0.2);
+            border-radius: 50%; display: flex; justify-content: center; align-items: center;
+            cursor: pointer; transition: all 0.3s ease; z-index: 10002;
+        }
+        .lightbox-close:hover { background: rgba(232, 237, 233, 0.2); transform: rotate(90deg); }
+        .lightbox-close svg { width: 20px; height: 20px; stroke: var(--color-ink); }
+        .lightbox-hint {
+            position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+            font-family: var(--font-main); font-size: 0.75rem; font-weight: 500;
+            letter-spacing: 0.1em; text-transform: uppercase; color: rgba(232, 237, 233, 0.5);
+            background: rgba(10, 15, 12, 0.6); padding: 0.5rem 1rem; border-radius: 100px;
+            border: 1px solid rgba(232, 237, 233, 0.1); pointer-events: none; transition: opacity 0.3s ease;
+        }
+        .lightbox.active.zoomed-state .lightbox-hint { opacity: 0; }
+
+        @media (max-width: 900px) {
+            .hero-content, .split-layout, .config-grid, .features-list { grid-template-columns: 1fr; gap: 3rem; }
+            .vision-grid { grid-template-columns: 1fr; }
+            .timeline { flex-direction: column; gap: 2rem; }
+            .timeline::before { display: none; }
+            section { padding: 5rem 1.5rem; }
+            .nav-fixed { padding: 1rem 1.5rem; }
+            .footer-content { flex-direction: column; text-align: center; gap: 2rem; }
+            .footer-contact { text-align: center; }
+            .btn-outline { margin-left: 0; margin-top: 1rem; }
+            .cta-buttons { display: flex; flex-direction: column; align-items: center; }
+            .lightbox-img.zoomed { transform: scale(1.5); }
+        }
+
+        @media print {
+            .nav-fixed, .btn-nav, .cta-buttons, .modal, .lightbox { display: none !important; }
+            section { padding: 2rem 0; page-break-inside: avoid; }
+            body { background: white; color: black; }
+            .hero, .opportunity, .vision, .configurations, .features, .timeline-section, .investment { background: white; color: black; }
+            h1, h2, h3, p, .meta-item, .timeline-desc, .config-list li { color: black; }
+            .insight-card, .pricing-card, .config-card { border: 1px solid #ccc; background: white; }
+            .zoomable-img { cursor: default; }
+        }
+    </style>
+</head>
+<body>
+    <div class="scroll-progress" id="scrollProgress"></div>
+
+    <nav class="nav-fixed">
+        <a href="#" class="nav-logo">Sonny Sayi Solutions</a>
+        <div class="nav-actions">
+            <button class="btn-nav" onclick="showDownloadModal()">Download PDF</button>
+            <a href="#contact" class="btn-nav">Begin</a>
+        </div>
+    </nav>
+
+    <section class="hero" id="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text fade-in">
+                    <span class="label">Hardware & Software Proposal</span>
+                    <h1>Restaurant POS & Management System</h1>
+                    <p style="font-size: 1.2rem; font-style: italic; color: var(--color-sage); font-weight: 400;">
+                        A seamless dining experience starts behind the scenes.
+                    </p>
+                    <div class="hero-meta">
+                        <div class="meta-item"><strong>Prepared By</strong>Sonny Sayi Solutions</div>
+                        <div class="meta-item"><strong>Timeline</strong>1 Week + 1 Day Setup</div>
+                        <div class="meta-item"><strong>Currency</strong>KES</div>
+                    </div>
+                </div>
+                <div class="hero-visual fade-in">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1200&auto=format&fit=crop" alt="Modern POS Software Dashboard Interface" class="zoomable-img">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="opportunity" id="opportunity">
+        <div class="container">
+            <div class="split-layout">
+                <div class="fade-in">
+                    <span class="label">Choosing Your Workflow</span>
+                    <h2>The software is identical. The hardware dictates your floor dynamics.</h2>
+                    <p>We offer two hardware configurations. Both run the exact same powerful software, connect to the same central database, and print to the same thermal printer. The choice depends entirely on how your team prefers to operate.</p>
+                    <p>Our goal is to educate you on the operational differences so you can select the setup that best matches your restaurant's unique flow, staff size, and service style.</p>
+                </div>
+                <div class="fade-in">
+                    <div class="insight-card">
+                        <h3>The Mobility Factor</h3>
+                        <p>A tablet is not tethered to a wall. It allows waiters to take orders directly at the table, eliminating the need to walk back and forth to a fixed terminal. This is highly dependent on your number of active waiters and table layout.</p>
+                    </div>
+                    <div class="insight-card">
+                        <h3>The Station Factor</h3>
+                        <p>A fixed touchscreen provides a dedicated, stable command center. Some teams prefer this for speed, as it offers a larger interface and prevents devices from being misplaced during a busy rush.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="vision" id="vision">
+        <div class="container">
+            <div class="fade-in" style="text-align: center; max-width: 700px; margin: 0 auto;">
+                <span class="label">The Vision</span>
+                <h2>One unified system. Total operational clarity.</h2>
+                <p>Regardless of the hardware you choose, the outcome is the same: a streamlined operation where data flows seamlessly from the table to the kitchen, and finally to your management reports.</p>
+            </div>
+            <div class="vision-grid fade-in">
+                <div class="vision-card">
+                    <div class="vision-number">01</div>
+                    <h3>Fluid Service</h3>
+                    <p>Instant digital ordering improves table turnover and eliminates handwritten slip errors.</p>
+                </div>
+                <div class="vision-card">
+                    <div class="vision-number">02</div>
+                    <h3>Precise Control</h3>
+                    <p>Ingredient-level stock tracking means you know exactly what is being used, wasted, or needs reordering.</p>
+                </div>
+                <div class="vision-card">
+                    <div class="vision-number">03</div>
+                    <h3>Seamless Payments</h3>
+                    <p>Integrated cash, M-Pesa, and card reconciliation with automated shift reporting.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="configurations" id="configurations">
+        <div class="container">
+            <div class="fade-in" style="text-align: center; max-width: 700px; margin: 0 auto;">
+                <span class="label">Hardware Configurations</span>
+                <h2>Select the setup that fits your floor.</h2>
+            </div>
+            <div class="config-grid fade-in">
+                <div class="config-card">
+                    <span class="label">Option 01</span>
+                    <h3>The Mobile Setup</h3>
+                    <p style="color: rgba(232, 237, 233, 0.6); font-size: 0.9rem;">Tablet-based ordering with desktop cashier operations.</p>
+                    <ul class="config-list">
+                        <li>Android tablet for mobile waiter ordering</li>
+                        <li>Desktop computer with electronic cash drawer</li>
+                        <li>80mm thermal printer (kitchen slips & receipts)</li>
+                        <li>Wi-Fi router, networking, and installation</li>
+                        <li>Complete core software deployment</li>
+                    </ul>
+                    <div class="config-price">KES 105,000</div>
+                    <p style="font-size: 0.9rem; color: rgba(232, 237, 233, 0.6); font-weight: 500;">
+                        Best for dynamic floors. Waiters are not limited to a fixed station, allowing them to serve tables faster. Ideal if you want to share devices among a larger waiting staff.
+                    </p>
+                </div>
+
+                <div class="config-card">
+                    <span class="label">Option 02</span>
+                    <h3>The Dedicated Setup</h3>
+                    <p style="color: rgba(232, 237, 233, 0.6); font-size: 0.9rem;">Fixed touchscreen POS with desktop cashier operations.</p>
+                    <ul class="config-list">
+                        <li>15-inch touchscreen POS terminal for waiter ordering</li>
+                        <li>Desktop computer with electronic cash drawer</li>
+                        <li>80mm thermal printer (kitchen slips & receipts)</li>
+                        <li>Wi-Fi router, networking, and installation</li>
+                        <li>Complete core software deployment</li>
+                    </ul>
+                    <div class="config-price">KES 125,000</div>
+                    <p style="font-size: 0.9rem; color: rgba(232, 237, 233, 0.6); font-weight: 500;">
+                        Best for structured floors. Provides a robust, fixed command center (e.g., at the entrance or a dedicated waiter station) with a larger interface for rapid order entry.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features" id="features">
+        <div class="container">
+            <div class="fade-in" style="text-align: center; max-width: 700px; margin: 0 auto;">
+                <span class="label">Software Capabilities</span>
+                <h2>Comprehensive control, simplified.</h2>
+            </div>
+            <div class="features-list fade-in">
+                <div class="feature-item">
+                    <h4>Order Management</h4>
+                    <p>Digital menus, table routing, meal variations, and instant kitchen slip printing.</p>
+                </div>
+                <div class="feature-item">
+                    <h4>Inventory Intelligence</h4>
+                    <p>Recipe costing, automatic stock deductions, low-stock alerts, and wastage tracking.</p>
+                </div>
+                <div class="feature-item">
+                    <h4>Leadership Reports</h4>
+                    <p>Clear visibility into daily sales, gross profit, ingredient consumption, and staff performance.</p>
+                </div>
+                <div class="feature-item">
+                    <h4>Cloud Synchronisation</h4>
+                    <p>A centralised database ensuring the waiter, kitchen, and cashier always see real-time data.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="timeline-section" id="timeline">
+        <div class="container">
+            <div class="fade-in" style="text-align: center; max-width: 700px; margin: 0 auto;">
+                <span class="label">Implementation</span>
+                <h2>1 week of development. 1 day of setup.</h2>
+                <p>We build the system off-site to avoid disrupting your daily operations, then install and train your team in a single, focused day.</p>
+            </div>
+            <div class="timeline fade-in">
+                <div class="timeline-item">
+                    <div class="timeline-day">1-5</div>
+                    <div class="timeline-label">Software Development</div>
+                    <div class="timeline-desc">Customising the software, mapping your menu, recipes, and configuring staff roles.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-day">6</div>
+                    <div class="timeline-label">On-Site Setup</div>
+                    <div class="timeline-desc">Physical hardware installation, networking, and device synchronisation at your venue.</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-day">7</div>
+                    <div class="timeline-label">Training & Launch</div>
+                    <div class="timeline-desc">Rigorous system testing, hands-on staff training, and official operational handover.</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="investment" id="investment">
+        <div class="container">
+            <div class="pricing-card fade-in">
+                <div style="text-align: center;">
+                    <span class="label">Commercial Summary</span>
+                    <h2 style="font-size: 2rem; margin-bottom: 1rem;">Transparent Investment</h2>
+                </div>
+                <table class="payment-table">
+                    <tr>
+                        <td><strong>Option 1:</strong> Mobile Tablet Setup (Initial Investment)</td>
+                        <td>KES 105,000</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Option 2:</strong> Dedicated Touchscreen Setup (Initial Investment)</td>
+                        <td>KES 125,000</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Annual Licence</strong> (Hosting, backups, maintenance, support)</td>
+                        <td>KES 10,000 / year</td>
+                    </tr>
+                </table>
+
+                <div style="margin-top: 2.5rem; padding-top: 2rem; border-top: 1px solid rgba(232, 237, 233, 0.1);">
+                    <h4 style="text-align: left; margin-bottom: 1.5rem; color: var(--color-accent);">Optional Integrations (Not included in base software fee)</h4>
+                    <table class="payment-table" style="margin: 0; max-width: 100%;">
+                        <tr>
+                            <td><strong>M-Pesa Integration</strong> (Automated payment confirmation & Till/Paybill)</td>
+                            <td>Quoted Separately</td>
+                        </tr>
+                        <tr>
+                            <td><strong>eTIMS Integration</strong> (KRA-compliant electronic tax invoicing)</td>
+                            <td>Quoted Separately</td>
+                        </tr>
+                    </table>
+                    <p style="margin-top: 1.5rem; font-size: 0.85rem; color: rgba(232, 237, 233, 0.5); text-align: left;">
+                        * The base KES 20,000 software development fee covers the core POS, inventory, and reporting system. Advanced third-party integrations require separate scoping, technical assessment, and pricing based on your specific business requirements.
+                    </p>
+                </div>
+
+                <div style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid rgba(232, 237, 233, 0.1); text-align: center;">
+                    <p style="font-size: 0.9rem; color: rgba(232, 237, 233, 0.6); margin-bottom: 0;">
+                        <strong>Terms:</strong> Hardware paid prior to procurement. Software: 50% deposit to commence, 50% upon completion. Annual licence payable after year one.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta" id="contact">
+        <div class="container">
+            <div class="fade-in">
+                <span class="label">Next Steps</span>
+                <h2>Ready to streamline your operations?</h2>
+                <p>Review the two hardware options above and let us know which configuration best matches your restaurant's workflow. We will then schedule the development and on-site setup.</p>
+                <div class="cta-buttons">
+                    <a href="mailto:info@sonnysayisolutions.co.ke?subject=Restaurant POS Proposal&body=Hello, I would like to proceed with the Restaurant POS & Management System proposal." class="btn-large btn-dark">Select Configuration & Begin</a>
+                    <button class="btn-large btn-outline" onclick="showDownloadModal()">Download as PDF</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div>
+                <div class="footer-brand">Sonny Sayi Solutions</div>
+                <div class="footer-tagline">Technology & Creative Solutions</div>
+            </div>
+            <div class="footer-contact">
+                <span>Nairobi, Kenya</span>
+                <a href="mailto:info@sonnysayisolutions.co.ke">info@sonnysayisolutions.co.ke</a>
+                <a href="tel:+254736194051">+254 736 194 051</a>
+            </div>
+        </div>
+    </footer>
+
+    <div class="modal" id="downloadModal">
+        <div class="modal-content">
+            <h3>Save this Proposal</h3>
+            <p>Use your browser's print function to save this page as a clean, professional PDF document.</p>
+            <div class="modal-buttons">
+                <button class="btn-modal primary" onclick="downloadPDF()">Open Print Dialog</button>
+                <button class="btn-modal" onclick="closeModal()">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="lightbox" id="lightbox">
+        <div class="lightbox-close" id="lightboxClose">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </div>
+        <div class="lightbox-img-container">
+            <img src="" alt="Zoomed View" class="lightbox-img" id="lightboxImg">
+        </div>
+        <div class="lightbox-hint">Click image to zoom</div>
+    </div>
+
+    <script>
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            document.getElementById('scrollProgress').style.width = ((winScroll / height) * 100) + '%';
+        });
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        function showDownloadModal() { document.getElementById('downloadModal').classList.add('active'); }
+        function closeModal() { document.getElementById('downloadModal').classList.remove('active'); }
+        function downloadPDF() { window.print(); closeModal(); }
+        document.getElementById('downloadModal').addEventListener('click', (e) => { if (e.target === document.getElementById('downloadModal')) closeModal(); });
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
+        });
+
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightboxImg');
+        const lightboxClose = document.getElementById('lightboxClose');
+
+        document.querySelectorAll('.zoomable-img').forEach(img => {
+            img.addEventListener('click', (e) => {
+                e.stopPropagation();
+                lightboxImg.src = img.src;
+                lightbox.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        lightboxImg.addEventListener('click', (e) => {
+            e.stopPropagation();
+            lightboxImg.classList.toggle('zoomed');
+            lightbox.classList.toggle('zoomed-state');
+        });
+
+        function closeLightbox() {
+            lightbox.classList.remove('active', 'zoomed-state');
+            lightboxImg.classList.remove('zoomed');
+            document.body.style.overflow = '';
+        }
+
+        lightboxClose.addEventListener('click', closeLightbox);
+        lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+        document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && lightbox.classList.contains('active')) closeLightbox(); });
+    </script>
+</body>
+</html>

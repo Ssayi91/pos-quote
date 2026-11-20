@@ -119,13 +119,13 @@
         }
 
         .configurations { background: var(--color-surface); }
-        .config-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; margin-top: 3rem; }
         .config-card {
             background: rgba(232, 237, 233, 0.02); border: 1px solid rgba(232, 237, 233, 0.1);
             border-radius: 8px; padding: 3rem; transition: all 0.4s var(--transition-smooth);
-            display: flex; flex-direction: column;
+            display: flex; flex-direction: column; max-width: 700px; margin: 3rem auto 0;
         }
         .config-card:hover { border-color: var(--color-sage); transform: translateY(-4px); }
+        .config-card.featured { border-color: var(--color-accent); box-shadow: 0 0 30px rgba(201, 169, 110, 0.05); }
 
         .config-price { font-family: var(--font-main); font-size: 2.5rem; font-weight: 700; color: var(--color-ink); margin: 1.5rem 0; }
         .config-list { list-style: none; margin: 1.5rem 0; flex-grow: 1; }
@@ -242,7 +242,7 @@
         .lightbox.active.zoomed-state .lightbox-hint { opacity: 0; }
 
         @media (max-width: 900px) {
-            .hero-content, .split-layout, .config-grid, .features-list { grid-template-columns: 1fr; gap: 3rem; }
+            .hero-content, .split-layout, .features-list { grid-template-columns: 1fr; gap: 3rem; }
             .vision-grid { grid-template-columns: 1fr; }
             .timeline { flex-direction: column; gap: 2rem; }
             .timeline::before { display: none; }
@@ -303,19 +303,19 @@
         <div class="container">
             <div class="split-layout">
                 <div class="fade-in">
-                    <span class="label">Choosing Your Workflow</span>
-                    <h2>The software is identical. The hardware dictates your floor dynamics.</h2>
-                    <p>We offer two hardware configurations. Both run the exact same powerful software, connect to the same central database, and print to the same thermal printer. The choice depends entirely on how your team prefers to operate.</p>
-                    <p>Our goal is to educate you on the operational differences so you can select the setup that best matches your restaurant's unique flow, staff size, and service style.</p>
+                    <span class="label">Your Dedicated Workflow</span>
+                    <h2>A robust, fixed command center tailored for your floor dynamics.</h2>
+                    <p>We have designed a dedicated hardware configuration that runs our powerful software, connects seamlessly to your central database, and prints reliably to your thermal printers. This setup is specifically chosen to best match your restaurant's unique flow, staff size, and service style.</p>
+                    <p>Our goal is to provide you with a stable, high-performance system that eliminates friction during busy rushes and gives your team the tools they need to succeed.</p>
                 </div>
                 <div class="fade-in">
                     <div class="insight-card">
-                        <h3>The Mobility Factor</h3>
-                        <p>A tablet is not tethered to a wall. It allows waiters to take orders directly at the table, eliminating the need to walk back and forth to a fixed terminal. This is highly dependent on your number of active waiters and table layout.</p>
+                        <h3>The Dedicated Command Center</h3>
+                        <p>A fixed 15-inch touchscreen provides a stable, dedicated ordering station. Teams prefer this for speed and reliability, as it offers a larger, more responsive interface and prevents devices from being misplaced or running out of battery during peak service hours.</p>
                     </div>
                     <div class="insight-card">
-                        <h3>The Station Factor</h3>
-                        <p>A fixed touchscreen provides a dedicated, stable command center. Some teams prefer this for speed, as it offers a larger interface and prevents devices from being misplaced during a busy rush.</p>
+                        <h3>Centralized Control</h3>
+                        <p>With the waiter terminal fixed at a strategic point (e.g., the entrance or a dedicated service station), order routing to the kitchen is instantaneous, and the desktop cashier computer maintains a single source of truth for all financial reconciliations.</p>
                     </div>
                 </div>
             </div>
@@ -352,43 +352,24 @@
     <section class="configurations" id="configurations">
         <div class="container">
             <div class="fade-in" style="text-align: center; max-width: 700px; margin: 0 auto;">
-                <span class="label">Hardware Configurations</span>
-                <h2>Select the setup that fits your floor.</h2>
+                <span class="label">Recommended Configuration</span>
+                <h2>The Dedicated Setup</h2>
+                <p style="color: rgba(232, 237, 233, 0.6);">Fixed touchscreen POS with desktop cashier operations.</p>
             </div>
-            <div class="config-grid fade-in">
-                <div class="config-card">
-                    <span class="label">Option 01</span>
-                    <h3>The Mobile Setup</h3>
-                    <p style="color: rgba(232, 237, 233, 0.6); font-size: 0.9rem;">Tablet-based ordering with desktop cashier operations.</p>
-                    <ul class="config-list">
-                        <li>Android tablet for mobile waiter ordering</li>
-                        <li>Desktop computer with electronic cash drawer</li>
-                        <li>80mm thermal printer (kitchen slips & receipts)</li>
-                        <li>Wi-Fi router, networking, and installation</li>
-                        <li>Complete core software deployment</li>
-                    </ul>
-                    <div class="config-price">KES 105,000</div>
-                    <p style="font-size: 0.9rem; color: rgba(232, 237, 233, 0.6); font-weight: 500;">
-                        Best for dynamic floors. Waiters are not limited to a fixed station, allowing them to serve tables faster. Ideal if you want to share devices among a larger waiting staff.
-                    </p>
-                </div>
-
-                <div class="config-card">
-                    <span class="label">Option 02</span>
-                    <h3>The Dedicated Setup</h3>
-                    <p style="color: rgba(232, 237, 233, 0.6); font-size: 0.9rem;">Fixed touchscreen POS with desktop cashier operations.</p>
-                    <ul class="config-list">
-                        <li>15-inch touchscreen POS terminal for waiter ordering</li>
-                        <li>Desktop computer with electronic cash drawer</li>
-                        <li>80mm thermal printer (kitchen slips & receipts)</li>
-                        <li>Wi-Fi router, networking, and installation</li>
-                        <li>Complete core software deployment</li>
-                    </ul>
-                    <div class="config-price">KES 125,000</div>
-                    <p style="font-size: 0.9rem; color: rgba(232, 237, 233, 0.6); font-weight: 500;">
-                        Best for structured floors. Provides a robust, fixed command center (e.g., at the entrance or a dedicated waiter station) with a larger interface for rapid order entry.
-                    </p>
-                </div>
+            <div class="config-card featured fade-in">
+                <span class="label">Option 02</span>
+                <h3>The Dedicated Setup</h3>
+                <ul class="config-list">
+                    <li>15-inch touchscreen POS terminal for waiter ordering</li>
+                    <li>Desktop computer with electronic cash drawer</li>
+                    <li>80mm thermal printer (kitchen slips & receipts)</li>
+                    <li>Wi-Fi router, networking, and professional installation</li>
+                    <li>Complete core software deployment and staff training</li>
+                </ul>
+                <div class="config-price">KES 125,000</div>
+                <p style="font-size: 0.9rem; color: rgba(232, 237, 233, 0.6); font-weight: 500; margin-bottom: 0;">
+                    Best for structured floors. Provides a robust, fixed command center with a larger interface for rapid, error-free order entry. Ideal for teams that value stability and speed during high-volume service.
+                </p>
             </div>
         </div>
     </section>
@@ -452,20 +433,34 @@
             <div class="pricing-card fade-in">
                 <div style="text-align: center;">
                     <span class="label">Commercial Summary</span>
-                    <h2 style="font-size: 2rem; margin-bottom: 1rem;">Transparent Investment</h2>
+                    <h2 style="font-size: 2rem; margin-bottom: 1rem;">Flexible Payment Plan</h2>
+                    <p style="color: rgba(232, 237, 233, 0.6); max-width: 500px; margin: 0 auto 2rem;">We offer a structured installment plan to make acquiring your dedicated system seamless and cash-flow friendly.</p>
                 </div>
+                
                 <table class="payment-table">
                     <tr>
-                        <td><strong>Option 1:</strong> Mobile Tablet Setup (Initial Investment)</td>
-                        <td>KES 105,000</td>
+                        <td><strong>Initial Deposit</strong> (Desktop Hardware & Setup)</td>
+                        <td>KES 30,000</td>
                     </tr>
                     <tr>
-                        <td><strong>Option 2:</strong> Dedicated Touchscreen Setup (Initial Investment)</td>
+                        <td><strong>Month 1 Installment</strong></td>
+                        <td>KES 35,000</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Month 2 Installment</strong></td>
+                        <td>KES 20,000</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Month 3 Installment</strong></td>
+                        <td>KES 20,000</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Month 4 Installment</strong> (Final Balance)</td>
+                        <td>KES 20,000</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Total Investment</strong></td>
                         <td>KES 125,000</td>
-                    </tr>
-                    <tr>
-                        <td><strong>Annual Licence</strong> (Hosting, backups, maintenance, support)</td>
-                        <td>KES 10,000 / year</td>
                     </tr>
                 </table>
 
@@ -482,13 +477,13 @@
                         </tr>
                     </table>
                     <p style="margin-top: 1.5rem; font-size: 0.85rem; color: rgba(232, 237, 233, 0.5); text-align: left;">
-                        * The base KES 20,000 software development fee covers the core POS, inventory, and reporting system. Advanced third-party integrations require separate scoping, technical assessment, and pricing based on your specific business requirements.
+                        * The base software development fee covers the core POS, inventory, and reporting system. Advanced third-party integrations require separate scoping, technical assessment, and pricing based on your specific business requirements.
                     </p>
                 </div>
 
                 <div style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid rgba(232, 237, 233, 0.1); text-align: center;">
                     <p style="font-size: 0.9rem; color: rgba(232, 237, 233, 0.6); margin-bottom: 0;">
-                        <strong>Terms:</strong> Hardware paid prior to procurement. Software: 50% deposit to commence, 50% upon completion. Annual licence payable after year one.
+                        <strong>Terms:</strong> Initial deposit paid prior to hardware procurement. Remaining balance paid in 4 monthly installments as outlined above. Annual licence (KES 10,000/year for hosting, backups, maintenance, and support) is payable after year one.
                     </p>
                 </div>
             </div>
@@ -500,9 +495,9 @@
             <div class="fade-in">
                 <span class="label">Next Steps</span>
                 <h2>Ready to streamline your operations?</h2>
-                <p>Review the two hardware options above and let us know which configuration best matches your restaurant's workflow. We will then schedule the development and on-site setup.</p>
+                <p>Review the dedicated configuration and payment plan above. Let us know you're ready to proceed, and we will schedule the development and on-site setup to match your timeline.</p>
                 <div class="cta-buttons">
-                    <a href="mailto:info@sonnysayisolutions.co.ke?subject=Restaurant POS Proposal&body=Hello, I would like to proceed with the Restaurant POS & Management System proposal." class="btn-large btn-dark">Select Configuration & Begin</a>
+                    <a href="mailto:info@sonnysayisolutions.co.ke?subject=Restaurant POS Proposal&body=Hello, I would like to proceed with the Dedicated Restaurant POS & Management System setup." class="btn-large btn-dark">Approve Configuration & Begin</a>
                     <button class="btn-large btn-outline" onclick="showDownloadModal()">Download as PDF</button>
                 </div>
             </div>

@@ -17,6 +17,7 @@
             --color-sage: #7a8b6f;
             --font-main: 'Montserrat', sans-serif;
             --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+            --radius: 4px; /* Sharp, professional, non-cliche */
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -31,34 +32,37 @@
             font-size: 1rem;
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
+            background-image: radial-gradient(rgba(201, 169, 110, 0.03) 1px, transparent 1px);
+            background-size: 32px 32px;
         }
 
         .scroll-progress {
             position: fixed; top: 0; left: 0; height: 2px;
             background: linear-gradient(90deg, var(--color-sage), var(--color-accent));
-            z-index: 10000; transition: width 0.1s ease;
+            z-index: 10000; transition: width 0.1s linear;
         }
 
         .nav-fixed {
             position: fixed; top: 0; left: 0; right: 0;
             padding: 1.5rem 3rem; display: flex; justify-content: space-between; align-items: center;
-            z-index: 1000; background: linear-gradient(to bottom, var(--color-deep), transparent);
-            backdrop-filter: blur(8px);
+            z-index: 1000; background: rgba(10, 15, 12, 0.85);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(232, 237, 233, 0.05);
         }
 
         .nav-logo {
-            font-family: var(--font-main); font-size: 1rem; font-weight: 600;
-            color: var(--color-ink); text-decoration: none; letter-spacing: 0.1em; text-transform: uppercase;
+            font-family: var(--font-main); font-size: 0.9rem; font-weight: 700;
+            color: var(--color-ink); text-decoration: none; letter-spacing: 0.15em; text-transform: uppercase;
         }
 
         .nav-actions { display: flex; gap: 1rem; }
 
         .btn-nav {
             padding: 0.6rem 1.5rem; background: transparent;
-            border: 1px solid rgba(232, 237, 233, 0.3); color: var(--color-ink);
-            font-family: var(--font-main); font-size: 0.8rem; font-weight: 500;
-            letter-spacing: 0.05em; text-transform: uppercase; border-radius: 4px;
-            cursor: pointer; transition: all 0.4s var(--transition-smooth); text-decoration: none;
+            border: 1px solid rgba(232, 237, 233, 0.2); color: var(--color-ink);
+            font-family: var(--font-main); font-size: 0.75rem; font-weight: 600;
+            letter-spacing: 0.1em; text-transform: uppercase; border-radius: var(--radius);
+            cursor: pointer; transition: all 0.3s var(--transition-smooth); text-decoration: none;
         }
 
         .btn-nav:hover { background: var(--color-ink); color: var(--color-deep); border-color: var(--color-ink); }
@@ -66,66 +70,74 @@
         section { position: relative; padding: 8rem 3rem; display: flex; align-items: center; }
         .container { max-width: 1100px; margin: 0 auto; width: 100%; }
 
-        h1, h2, h3, h4 { font-family: var(--font-main); font-weight: 600; line-height: 1.2; letter-spacing: -0.02em; }
-        h1 { font-size: clamp(2.5rem, 6vw, 4rem); margin-bottom: 1.5rem; }
-        h2 { font-size: clamp(2rem, 4vw, 2.75rem); margin-bottom: 2rem; }
-        h3 { font-size: 1.25rem; margin-bottom: 1rem; color: var(--color-cream); font-weight: 600; }
-        h4 { font-size: 1rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.75rem; color: var(--color-accent); }
+        h1, h2, h3, h4 { font-family: var(--font-main); font-weight: 600; line-height: 1.15; letter-spacing: -0.03em; }
+        h1 { font-size: clamp(2.5rem, 5vw, 3.5rem); margin-bottom: 1.5rem; }
+        h2 { font-size: clamp(1.75rem, 3.5vw, 2.5rem); margin-bottom: 1.5rem; }
+        h3 { font-size: 1.15rem; margin-bottom: 1rem; color: var(--color-cream); font-weight: 600; letter-spacing: -0.01em; }
+        h4 { font-size: 0.85rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 1rem; color: var(--color-accent); }
 
-        p { margin-bottom: 1.5rem; color: rgba(232, 237, 233, 0.75); font-weight: 300; }
+        p { margin-bottom: 1.5rem; color: rgba(232, 237, 233, 0.65); font-weight: 300; font-size: 1.05rem; }
 
         .label {
-            font-family: var(--font-main); font-size: 0.75rem; font-weight: 600;
-            text-transform: uppercase; letter-spacing: 0.15em; color: var(--color-sage);
+            font-family: var(--font-main); font-size: 0.7rem; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 0.2em; color: var(--color-sage);
             margin-bottom: 1.5rem; display: block;
         }
 
         .hero { min-height: 100vh; background: var(--color-deep); position: relative; }
-        .hero-content { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+        .hero-content { display: grid; grid-template-columns: 1fr 1.2fr; gap: 5rem; align-items: center; }
 
         .hero-meta {
             display: flex; gap: 3rem; margin-top: 3rem; padding-top: 2rem;
             border-top: 1px solid rgba(232, 237, 233, 0.1);
         }
-        .meta-item { font-size: 0.85rem; color: rgba(232, 237, 233, 0.5); letter-spacing: 0.02em; }
-        .meta-item strong { color: var(--color-ink); display: block; font-weight: 600; margin-bottom: 0.25rem; }
+        .meta-item { font-size: 0.8rem; color: rgba(232, 237, 233, 0.5); letter-spacing: 0.02em; }
+        .meta-item strong { color: var(--color-ink); display: block; font-weight: 600; margin-bottom: 0.25rem; font-size: 0.9rem; }
 
         .hero-visual {
-            position: relative; border-radius: 8px; overflow: hidden;
+            position: relative; border-radius: var(--radius); overflow: hidden;
+            box-shadow: 0 40px 80px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(232, 237, 233, 0.08);
         }
         .zoomable-img {
             width: 100%; height: auto; display: block; cursor: zoom-in;
-            transition: opacity 0.3s ease, transform 0.3s ease;
+            transition: opacity 0.4s ease, transform 0.6s var(--transition-smooth);
         }
-        .zoomable-img:hover { opacity: 0.9; }
-        .hero-visual:hover .zoomable-img { transform: scale(1.02); }
+        .hero-visual:hover .zoomable-img { transform: scale(1.03); opacity: 0.9; }
 
         .opportunity { background: var(--color-surface); }
         .split-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; }
 
-        .insight-card {
-            background: rgba(232, 237, 233, 0.03); border: 1px solid rgba(232, 237, 233, 0.08);
-            border-radius: 8px; padding: 2.5rem; margin-bottom: 1.5rem;
-            transition: all 0.4s var(--transition-smooth); border-left: 3px solid var(--color-sage);
+        .insight-card, .vision-card, .feature-item {
+            background: rgba(232, 237, 233, 0.02); 
+            border: 1px solid rgba(232, 237, 233, 0.06);
+            border-radius: var(--radius); 
+            padding: 2.5rem; 
+            transition: all 0.4s var(--transition-smooth);
         }
-        .insight-card:hover { background: rgba(232, 237, 233, 0.05); border-left-color: var(--color-accent); }
+        .insight-card:hover, .vision-card:hover, .feature-item:hover { 
+            background: rgba(232, 237, 233, 0.04); 
+            border-color: rgba(201, 169, 110, 0.3);
+            transform: translateY(-4px);
+        }
+        .insight-card { margin-bottom: 1.5rem; }
 
         .vision { background: var(--color-deep); }
         .vision-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 4rem; }
-        .vision-card { padding: 2.5rem 2rem; border-top: 1px solid var(--color-sage); }
+        .vision-card { display: flex; flex-direction: column; }
         .vision-number {
-            font-family: var(--font-main); font-size: 3rem; font-weight: 700;
-            color: var(--color-accent); opacity: 0.4; line-height: 1; margin-bottom: 1.5rem;
+            font-family: var(--font-main); font-size: 2.5rem; font-weight: 700;
+            color: var(--color-accent); opacity: 0.3; line-height: 1; margin-bottom: 1.5rem;
         }
 
         .configurations { background: var(--color-surface); }
         .config-card {
             background: rgba(232, 237, 233, 0.02); border: 1px solid rgba(232, 237, 233, 0.1);
-            border-radius: 8px; padding: 3rem; transition: all 0.4s var(--transition-smooth);
+            border-radius: var(--radius); padding: 3rem; transition: all 0.4s var(--transition-smooth);
             display: flex; flex-direction: column; max-width: 700px; margin: 3rem auto 0;
         }
-        .config-card:hover { border-color: var(--color-sage); transform: translateY(-4px); }
         .config-card.featured { border-color: var(--color-accent); box-shadow: 0 0 30px rgba(201, 169, 110, 0.05); }
+        .config-card:hover { border-color: var(--color-sage); transform: translateY(-4px); }
 
         .config-price { font-family: var(--font-main); font-size: 2.5rem; font-weight: 700; color: var(--color-ink); margin: 1.5rem 0; }
         .config-list { list-style: none; margin: 1.5rem 0; flex-grow: 1; }
@@ -159,84 +171,119 @@
         .timeline-label { font-size: 0.9rem; font-weight: 600; color: var(--color-ink); margin-bottom: 0.5rem; }
         .timeline-desc { font-size: 0.85rem; color: rgba(232, 237, 233, 0.5); line-height: 1.5; font-weight: 300; }
 
-        .investment { background: var(--color-deep); }
-        .pricing-card { border: 1px solid rgba(232, 237, 233, 0.15); border-radius: 8px; padding: 4rem; max-width: 800px; margin: 0 auto; }
+        .investment { background: var(--color-surface); }
+        .pricing-card { 
+            border: 1px solid rgba(232, 237, 233, 0.1); 
+            border-radius: var(--radius); 
+            padding: 4rem; 
+            max-width: 800px; 
+            margin: 0 auto; 
+            background: rgba(10, 15, 12, 0.4);
+        }
         .payment-table { width: 100%; max-width: 600px; margin: 2rem auto; border-collapse: collapse; }
-        .payment-table td { padding: 1rem 0; border-bottom: 1px solid rgba(232, 237, 233, 0.1); text-align: left; font-size: 0.95rem; font-weight: 300; }
-        .payment-table td:last-child { text-align: right; font-weight: 600; }
-        .payment-table tr:last-child td { border-bottom: none; font-size: 1.1rem; color: var(--color-accent); }
+        .payment-table td { padding: 1.25rem 0; border-bottom: 1px solid rgba(232, 237, 233, 0.08); text-align: left; font-size: 0.95rem; font-weight: 300; }
+        .payment-table td:last-child { text-align: right; font-weight: 600; color: var(--color-cream); }
+        .payment-table tr:last-child td { border-bottom: none; font-size: 1.1rem; color: var(--color-accent); font-weight: 700; }
 
         .cta { background: var(--color-cream); color: var(--color-deep); text-align: center; }
         .cta h2 { color: var(--color-deep); }
-        .cta p { color: rgba(10, 15, 12, 0.7); max-width: 600px; margin: 0 auto 2.5rem; }
+        .cta p { color: rgba(10, 15, 12, 0.6); max-width: 600px; margin: 0 auto 2.5rem; }
 
         .btn-large {
-            padding: 1rem 2.5rem; font-size: 0.85rem; font-weight: 600;
-            letter-spacing: 0.1em; text-transform: uppercase; border-radius: 4px;
+            padding: 1rem 2.5rem; font-size: 0.8rem; font-weight: 700;
+            letter-spacing: 0.12em; text-transform: uppercase; border-radius: var(--radius);
             text-decoration: none; display: inline-flex; align-items: center; gap: 0.75rem;
-            transition: all 0.4s var(--transition-smooth); border: 1px solid var(--color-deep);
+            transition: all 0.3s var(--transition-smooth); border: 1px solid var(--color-deep);
+            cursor: pointer;
         }
-        .btn-dark { background: var(--color-deep); color: var(--color-cream); }
-        .btn-dark:hover { background: var(--color-surface); transform: translateY(-2px); }
+        .btn-dark { background: var(--color-deep); color: var(--color-cream); border: none; }
+        .btn-dark:hover { background: var(--color-surface); transform: translateY(-2px); box-shadow: 0 10px 30px rgba(10, 15, 12, 0.2); }
         .btn-outline { background: transparent; color: var(--color-deep); margin-left: 1rem; }
         .btn-outline:hover { background: var(--color-deep); color: var(--color-cream); }
 
-        footer { background: var(--color-deep); padding: 4rem 3rem; border-top: 1px solid rgba(232, 237, 233, 0.1); }
+        footer { background: var(--color-deep); padding: 4rem 3rem; border-top: 1px solid rgba(232, 237, 233, 0.08); }
         .footer-content { max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; }
-        .footer-brand { font-family: var(--font-main); font-size: 1.2rem; font-weight: 600; letter-spacing: 0.05em; }
-        .footer-tagline { font-size: 0.85rem; color: var(--color-sage); margin-top: 0.5rem; font-weight: 300; }
+        .footer-brand { font-family: var(--font-main); font-size: 1rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+        .footer-tagline { font-size: 0.8rem; color: var(--color-sage); margin-top: 0.5rem; font-weight: 400; letter-spacing: 0.05em; }
         .footer-contact { text-align: right; font-size: 0.85rem; color: rgba(232, 237, 233, 0.5); line-height: 1.8; }
         .footer-contact a { color: var(--color-ink); text-decoration: none; display: block; transition: color 0.3s ease; }
         .footer-contact a:hover { color: var(--color-accent); }
 
-        .fade-in { opacity: 0; transform: translateY(20px); transition: opacity 0.8s var(--transition-smooth), transform 0.8s var(--transition-smooth); }
+        .fade-in { opacity: 0; transform: translateY(30px); transition: opacity 0.8s var(--transition-smooth), transform 0.8s var(--transition-smooth); }
         .fade-in.visible { opacity: 1; transform: translateY(0); }
 
+        /* Modal Styles */
         .modal {
             display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
             background: rgba(10, 15, 12, 0.95); z-index: 10000;
             align-items: center; justify-content: center; padding: 2rem;
         }
         .modal.active { display: flex; }
-        .modal-content { background: var(--color-surface); border: 1px solid rgba(232, 237, 233, 0.15); border-radius: 8px; padding: 3rem; max-width: 450px; text-align: center; }
-        .modal h3 { margin-bottom: 1rem; font-size: 1.5rem; }
-        .modal p { margin-bottom: 2rem; font-size: 0.95rem; }
-        .modal-buttons { display: flex; gap: 1rem; justify-content: center; }
-        .btn-modal {
-            padding: 0.8rem 1.5rem; border-radius: 4px; border: 1px solid rgba(232, 237, 233, 0.3);
-            background: transparent; color: var(--color-ink); font-family: var(--font-main);
-            font-size: 0.8rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase;
-            cursor: pointer; transition: all 0.3s ease;
+        .modal-content { 
+            background: var(--color-surface); 
+            border: 1px solid rgba(232, 237, 233, 0.1); 
+            border-radius: var(--radius); 
+            padding: 3rem; 
+            max-width: 500px; 
+            width: 100%;
         }
-        .btn-modal.primary { background: var(--color-sage); border-color: var(--color-sage); color: var(--color-deep); }
-        .btn-modal:hover { transform: translateY(-2px); }
+        .modal h3 { margin-bottom: 0.5rem; font-size: 1.25rem; color: var(--color-cream); }
+        .modal > p { margin-bottom: 2rem; font-size: 0.9rem; color: rgba(232, 237, 233, 0.6); }
+        
+        .form-group { margin-bottom: 1.5rem; text-align: left; }
+        .form-group label {
+            display: block; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em;
+            text-transform: uppercase; color: var(--color-sage); margin-bottom: 0.5rem;
+        }
+        .form-input {
+            width: 100%; padding: 0.9rem 1rem; background: rgba(10, 15, 12, 0.6);
+            border: 1px solid rgba(232, 237, 233, 0.15); border-radius: var(--radius);
+            color: var(--color-ink); font-family: var(--font-main); font-size: 0.95rem;
+            transition: all 0.3s ease; outline: none;
+        }
+        .form-input:focus { border-color: var(--color-accent); background: rgba(10, 15, 12, 0.9); }
+        .form-input::placeholder { color: rgba(232, 237, 233, 0.3); }
+
+        .modal-buttons { display: flex; gap: 1rem; justify-content: center; margin-top: 2rem; }
+        .btn-modal {
+            padding: 0.9rem 1.5rem; border-radius: var(--radius); border: 1px solid rgba(232, 237, 233, 0.2);
+            background: transparent; color: var(--color-ink); font-family: var(--font-main);
+            font-size: 0.75rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+            cursor: pointer; transition: all 0.3s ease; flex: 1;
+        }
+        .btn-modal.primary { 
+            background: var(--color-sage); border-color: var(--color-sage); color: var(--color-deep); 
+            display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+        }
+        .btn-modal.primary:hover { background: var(--color-accent); border-color: var(--color-accent); transform: translateY(-2px); }
+        .btn-modal.secondary:hover { background: rgba(232, 237, 233, 0.05); }
 
         .lightbox {
             display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(10, 15, 12, 0.95); backdrop-filter: blur(10px); z-index: 10001;
+            background: rgba(10, 15, 12, 0.98); backdrop-filter: blur(10px); z-index: 10001;
             justify-content: center; align-items: center; opacity: 0; transition: opacity 0.4s ease; cursor: zoom-out;
         }
         .lightbox.active { display: flex; opacity: 1; }
         .lightbox-img-container { position: relative; max-width: 90vw; max-height: 90vh; display: flex; justify-content: center; align-items: center; }
         .lightbox-img {
-            max-width: 100%; max-height: 85vh; object-fit: contain; border-radius: 8px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5); transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            transform-origin: center center; cursor: zoom-in; border: 1px solid rgba(201, 169, 110, 0.3);
+            max-width: 100%; max-height: 85vh; object-fit: contain; border-radius: var(--radius);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5); transition: transform 0.4s var(--transition-smooth);
+            transform-origin: center center; cursor: zoom-in; border: 1px solid rgba(201, 169, 110, 0.2);
         }
         .lightbox-img.zoomed { transform: scale(1.8); cursor: zoom-out; max-width: none; max-height: none; }
         .lightbox-close {
             position: absolute; top: 2rem; right: 2rem; width: 48px; height: 48px;
-            background: rgba(232, 237, 233, 0.1); border: 1px solid rgba(232, 237, 233, 0.2);
+            background: rgba(232, 237, 233, 0.05); border: 1px solid rgba(232, 237, 233, 0.1);
             border-radius: 50%; display: flex; justify-content: center; align-items: center;
             cursor: pointer; transition: all 0.3s ease; z-index: 10002;
         }
-        .lightbox-close:hover { background: rgba(232, 237, 233, 0.2); transform: rotate(90deg); }
+        .lightbox-close:hover { background: rgba(232, 237, 233, 0.1); transform: rotate(90deg); }
         .lightbox-close svg { width: 20px; height: 20px; stroke: var(--color-ink); }
         .lightbox-hint {
             position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
-            font-family: var(--font-main); font-size: 0.75rem; font-weight: 500;
-            letter-spacing: 0.1em; text-transform: uppercase; color: rgba(232, 237, 233, 0.5);
-            background: rgba(10, 15, 12, 0.6); padding: 0.5rem 1rem; border-radius: 100px;
+            font-family: var(--font-main); font-size: 0.7rem; font-weight: 600;
+            letter-spacing: 0.15em; text-transform: uppercase; color: rgba(232, 237, 233, 0.4);
+            background: rgba(10, 15, 12, 0.8); padding: 0.5rem 1rem; border-radius: 100px;
             border: 1px solid rgba(232, 237, 233, 0.1); pointer-events: none; transition: opacity 0.3s ease;
         }
         .lightbox.active.zoomed-state .lightbox-hint { opacity: 0; }
@@ -253,15 +300,16 @@
             .btn-outline { margin-left: 0; margin-top: 1rem; }
             .cta-buttons { display: flex; flex-direction: column; align-items: center; }
             .lightbox-img.zoomed { transform: scale(1.5); }
+            .hero-meta { flex-direction: column; gap: 1.5rem; }
         }
 
         @media print {
             .nav-fixed, .btn-nav, .cta-buttons, .modal, .lightbox { display: none !important; }
             section { padding: 2rem 0; page-break-inside: avoid; }
-            body { background: white; color: black; }
-            .hero, .opportunity, .vision, .configurations, .features, .timeline-section, .investment { background: white; color: black; }
+            body { background: white; color: black; background-image: none; }
+            .hero, .opportunity, .vision, .configurations, .features, .timeline-section, .investment, .cta { background: white; color: black; }
             h1, h2, h3, p, .meta-item, .timeline-desc, .config-list li { color: black; }
-            .insight-card, .pricing-card, .config-card { border: 1px solid #ccc; background: white; }
+            .insight-card, .pricing-card, .config-card, .vision-card, .feature-item { border: 1px solid #ccc; background: white; }
             .zoomable-img { cursor: default; }
         }
     </style>
@@ -283,13 +331,13 @@
                 <div class="hero-text fade-in">
                     <span class="label">Hardware & Software Proposal</span>
                     <h1>Restaurant POS & Management System</h1>
-                    <p style="font-size: 1.2rem; font-style: italic; color: var(--color-sage); font-weight: 400;">
+                    <p style="font-size: 1.15rem; color: var(--color-sage); font-weight: 400; line-height: 1.6;">
                         A seamless dining experience starts behind the scenes.
                     </p>
                     <div class="hero-meta">
                         <div class="meta-item"><strong>Prepared By</strong>Sonny Sayi Solutions</div>
                         <div class="meta-item"><strong>Timeline</strong>1 Week + 1 Day Setup</div>
-                        <div class="meta-item"><strong>Currency</strong>KES</div>
+                        <div class="meta-item"><strong>Investment</strong>KES 125,000</div>
                     </div>
                 </div>
                 <div class="hero-visual fade-in">
@@ -315,7 +363,7 @@
                     </div>
                     <div class="insight-card">
                         <h3>Centralized Control</h3>
-                        <p>With the waiter terminal fixed at a strategic point (e.g., the entrance or a dedicated service station), order routing to the kitchen is instantaneous, and the desktop cashier computer maintains a single source of truth for all financial reconciliations.</p>
+                        <p>With the waiter terminal fixed at a strategic point, order routing to the kitchen is instantaneous, and the desktop cashier computer maintains a single source of truth for all financial reconciliations.</p>
                     </div>
                 </div>
             </div>
@@ -460,7 +508,7 @@
                     </tr>
                     <tr>
                         <td><strong>Total Investment</strong></td>
-                        <td>KES 125,000</td>
+                        <td><strong>KES 125,000</strong></td>
                     </tr>
                 </table>
 
@@ -495,9 +543,9 @@
             <div class="fade-in">
                 <span class="label">Next Steps</span>
                 <h2>Ready to streamline your operations?</h2>
-                <p>Review the dedicated configuration and payment plan above. Let us know you're ready to proceed, and we will schedule the development and on-site setup to match your timeline.</p>
+                <p>Review the dedicated configuration and payment plan above. Once you are ready to proceed, provide your details below to instantly connect with us via WhatsApp and schedule the project kickoff.</p>
                 <div class="cta-buttons">
-                    <a href="mailto:info@sonnysayisolutions.co.ke?subject=Restaurant POS Proposal&body=Hello, I would like to proceed with the Dedicated Restaurant POS & Management System setup." class="btn-large btn-dark">Approve Configuration & Begin</a>
+                    <button class="btn-large btn-dark" onclick="showApprovalModal()">Approve & Begin Project</button>
                     <button class="btn-large btn-outline" onclick="showDownloadModal()">Download as PDF</button>
                 </div>
             </div>
@@ -513,22 +561,51 @@
             <div class="footer-contact">
                 <span>Nairobi, Kenya</span>
                 <a href="mailto:info@sonnysayisolutions.co.ke">info@sonnysayisolutions.co.ke</a>
+                <a href="mailto:sonny.sayi@gmail.com">sonny.sayi@gmail.com</a>
                 <a href="tel:+254736194051">+254 736 194 051</a>
             </div>
         </div>
     </footer>
 
+    <!-- Download Modal -->
     <div class="modal" id="downloadModal">
         <div class="modal-content">
             <h3>Save this Proposal</h3>
             <p>Use your browser's print function to save this page as a clean, professional PDF document.</p>
             <div class="modal-buttons">
                 <button class="btn-modal primary" onclick="downloadPDF()">Open Print Dialog</button>
-                <button class="btn-modal" onclick="closeModal()">Close</button>
+                <button class="btn-modal secondary" onclick="closeModal('downloadModal')">Close</button>
             </div>
         </div>
     </div>
 
+    <!-- Smart Approval Modal -->
+    <div class="modal" id="approvalModal">
+        <div class="modal-content">
+            <h3>Let's Get Started</h3>
+            <p>Please provide your details so we can generate your personalized approval message via WhatsApp.</p>
+            
+            <div class="form-group">
+                <label for="clientName">Your Full Name</label>
+                <input type="text" id="clientName" class="form-input" placeholder="e.g., John Doe">
+            </div>
+            
+            <div class="form-group">
+                <label for="clientCompany">Company Name</label>
+                <input type="text" id="clientCompany" class="form-input" placeholder="e.g., Your Restaurant Name">
+            </div>
+
+            <div class="modal-buttons">
+                <button class="btn-modal primary" onclick="sendWhatsAppApproval()">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                    Send via WhatsApp
+                </button>
+                <button class="btn-modal secondary" onclick="closeModal('approvalModal')">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Lightbox -->
     <div class="lightbox" id="lightbox">
         <div class="lightbox-close" id="lightboxClose">
             <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
@@ -540,23 +617,58 @@
     </div>
 
     <script>
+        // Scroll Progress
         window.addEventListener('scroll', () => {
             const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
             const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
             document.getElementById('scrollProgress').style.width = ((winScroll / height) * 100) + '%';
         });
 
+        // Intersection Observer for fade-in animations
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
         }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-
         document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
+        // Modal Functions
         function showDownloadModal() { document.getElementById('downloadModal').classList.add('active'); }
-        function closeModal() { document.getElementById('downloadModal').classList.remove('active'); }
-        function downloadPDF() { window.print(); closeModal(); }
-        document.getElementById('downloadModal').addEventListener('click', (e) => { if (e.target === document.getElementById('downloadModal')) closeModal(); });
+        function showApprovalModal() { document.getElementById('approvalModal').classList.add('active'); }
+        
+        function closeModal(modalId) { 
+            document.getElementById(modalId).classList.remove('active'); 
+        }
+        
+        function downloadPDF() { window.print(); closeModal('downloadModal'); }
+        
+        // Close modal when clicking outside
+        document.querySelectorAll('.modal').forEach(modal => {
+            modal.addEventListener('click', (e) => { if (e.target === modal) modal.classList.remove('active'); });
+        });
 
+        // Smart WhatsApp Approval Logic
+        function sendWhatsAppApproval() {
+            const name = document.getElementById('clientName').value.trim();
+            const company = document.getElementById('clientCompany').value.trim();
+            
+            if (!name || !company) {
+                alert('Please provide both your name and company name to proceed.');
+                return;
+            }
+
+            const message = `Hello Sonny Sayi Solutions,\n\nI am ${name} from ${company}.\n\nWe have reviewed the Restaurant POS & Management System Proposal (Ref: Dedicated Setup / KES 125,000) and would like to approve and begin the project.\n\nPlease let us know the next steps regarding the KES 30,000 initial deposit and project kickoff.\n\nThank you.`;
+            
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappUrl = `https://wa.me/254736194051?text=${encodedMessage}`;
+            
+            window.open(whatsappUrl, '_blank');
+            closeModal('approvalModal');
+            
+            // Clear fields after sending
+            document.getElementById('clientName').value = '';
+            document.getElementById('clientCompany').value = '';
+        }
+
+        // Smooth scroll for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -565,6 +677,7 @@
             });
         });
 
+        // Lightbox Logic
         const lightbox = document.getElementById('lightbox');
         const lightboxImg = document.getElementById('lightboxImg');
         const lightboxClose = document.getElementById('lightboxClose');
